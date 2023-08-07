@@ -1,18 +1,27 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+<template lang="">
+  <div>
+    <button @click="down">down</button>{{count}} <button @click="up">up</button>
   </div>
 </template>
+<script>
+import {mapState, mapMutations} from 'vuex'
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-@Options({
-  components: {
-    HelloWorld,
+const countModule = "countModule"
+export default {
+  computed: {
+    ...mapState(countModule, ["count"])
   },
-})
-export default class HomeView extends Vue {}
+  methods: {
+    ...mapMutations(countModule, ["SET_COUNT"]),
+    up() {
+      this.SET_COUNT(this.count+1);
+    },
+    down() {
+      this.SET_COUNT(this.count-1);
+    }
+  },
+}
 </script>
+<style lang="">
+  
+</style>
